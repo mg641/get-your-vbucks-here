@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>V-Bucks Rewards</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Inter, Arial, sans-serif;
+    color: white;
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(circle at 20% 20%, #4930ff55, transparent 30%),
+        radial-gradient(circle at 80% 80%, #00d9ff44, transparent 30%),
+        linear-gradient(135deg, #090b20, #17104a, #090b20);
+
+    animation: backgroundMove 10s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundMove {
+    from {
+        background-position: 0% 0%;
+    }
+    to {
+        background-position: 100% 100%;
+    }
+}
+
+/* Floating particles */
+
+.particle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    opacity: .35;
+    animation: float 7s linear infinite;
+}
+
+.p1 { left: 10%; top: 80%; animation-delay: 0s; }
+.p2 { left: 25%; top: 60%; animation-delay: 2s; }
+.p3 { left: 50%; top: 90%; animation-delay: 4s; }
+.p4 { left: 75%; top: 70%; animation-delay: 1s; }
+.p5 { left: 90%; top: 40%; animation-delay: 3s; }
+
+@keyframes float {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: .5;
+    }
+
+    to {
+        transform: translateY(-500px);
+        opacity: 0;
+    }
+}
+
+/* Header */
+
+header {
+    text-align: center;
+    padding: 35px 20px 15px;
+}
+
+.logo {
+    font-family: Anton, Impact, sans-serif;
+    font-size: clamp(38px, 7vw, 72px);
+    letter-spacing: 2px;
+    text-shadow:
+        0 5px 0 #111,
+        0 0 30px #5d62ff;
+}
+
+.subtitle {
+    color: #c9c9e8;
+    font-size: 16px;
+}
+
+/* Main */
+
+.container {
+    width: min(850px, 92%);
+    margin: auto;
+}
+
+/* Main card */
+
+.card {
+    margin: 25px 0;
+    padding: 35px;
+    border-radius: 28px;
+
+    background: rgba(15, 18, 55, .78);
+    border: 1px solid rgba(255,255,255,.18);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.45),
+        inset 0 0 40px rgba(100,100,255,.06);
+
+    backdrop-filter: blur(18px);
+}
+
+/* Giant V-Bucks icon */
+
+.vbucks-icon {
+    width: 190px;
+    height: 190px;
+    margin: 5px auto 25px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 100px;
+
+    background:
+        radial-gradient(circle at 35% 25%, #ffffff, #61e8ff 20%, #2171ff 60%, #1435a8);
+
+    border: 8px solid #d9faff;
+
+    box-shadow:
+        0 0 15px #ffffff,
+        0 0 45px #35cfff,
+        0 0 100px #315cff;
+
+    animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(2deg);
+    }
+}
+
+h2 {
+    text-align: center;
+    font-family: Anton, Impact, sans-serif;
+    font-size: 38px;
+    letter-spacing: 1px;
+    margin: 10px 0;
+}
+
+.description {
+    text-align: center;
+    color: #c7c8e8;
+    margin-bottom: 30px;
+}
+
+/* Form */
+
+label {
+    display: block;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 17px;
+
+    border: 2px solid transparent;
+    border-radius: 14px;
+
+    background: #090b20;
+    color: white;
+
+    font-size: 16px;
+    outline: none;
+
+    margin-bottom: 20px;
+}
+
+input:focus,
+select:focus {
+    border-color: #45dfff;
+    box-shadow: 0 0 20px #35d9ff55;
+}
+
+/* Buttons */
+
+.main-button {
+    width: 100%;
+    padding: 18px;
+
+    border: 0;
+    border-radius: 15px;
+
+    color: white;
+    font-size: 20px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(90deg, #1677ff, #754cff, #1677ff);
+
+    background-size: 200%;
+
+    box-shadow:
+        0 8px 25px #315cff66;
+
+    transition: .2s;
+    animation: buttonGlow 3s linear infinite;
+}
+
+@keyframes buttonGlow {
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 200%;
+    }
+}
+
+.main-button:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 35px #315cff99;
+}
+
+.main-button:active {
+    transform: scale(.97);
+}
+
+/* Result */
+
+#result {
+    display: none;
+    margin-top: 25px;
+    padding: 25px;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    background: linear-gradient(
+        135deg,
+        rgba(0,220,255,.15),
+        rgba(110,70,255,.2)
+    );
+
+    border: 1px solid #54eaff88;
+
+    animation: resultAppear .5s ease;
+}
+
+@keyframes resultAppear {
+    from {
+        opacity: 0;
+        transform: scale(.8) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.reward-number {
+    font-family: Anton, Impact, sans-serif;
+    font-size: 48px;
+    color: #6eeaff;
+    text-shadow: 0 0 20px #35dfff;
+}
+
+/* Reward cards */
+
+.rewards-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.rewards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.reward-card {
+    padding: 20px;
+    border-radius: 18px;
+    text-align: center;
+
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+
+    transition: .25s;
+}
+
+.reward-card:hover {
+    transform: translateY(-7px);
+    background: rgba(255,255,255,.12);
+    box-shadow: 0 15px 35px rgba(0,0,0,.3);
+}
+
+.reward-icon {
+    font-size: 38px;
+}
+
+.reward-card strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 20px;
+}
+
+/* Notice */
+
+.notice {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 12px;
+    color: #999bbd;
+    line-height: 1.6;
+}
+
+/* Footer */
+
+footer {
+    text-align: center;
+    padding: 35px 15px;
+    color: #777a9d;
+    font-size: 12px;
+}
+
+/* Mobile */
+
+@media (max-width: 650px) {
+
+    .card {
+        padding: 22px;
+    }
+
+    .vbucks-icon {
+        width: 150px;
+        height: 150px;
+        font-size: 75px;
+    }
+
+    .rewards {
+        grid-template-columns: 1fr;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Animated background particles -->
+<div class="particle p1"></div>
+<div class="particle p2"></div>
+<div class="particle p3"></div>
+<div class="particle p4"></div>
+<div class="particle p5"></div>
+
+<header>
+    <div class="logo">V-BUCKS REWARDS</div>
+    <div class="subtitle">
+        Choose a reward and send it to a player
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="card">
+
+        <div class="vbucks-icon">
+            💎
+        </div>
+
+        <h2>GIVE V-BUCKS</h2>
+
+        <p class="description">
+            Enter a Fortnite display name and choose an amount.
+        </p>
+
+        <label for="username">
+            Fortnite Display Name
+        </label>
+
+        <input
+            id="username"
+            type="text"
+            maxlength="40"
+            placeholder="Enter display name"
+        >
+
+        <label for="amount">
+            Choose Amount
+        </label>
+
+        <select id="amount">
+            <option value="100">100 V-Bucks</option>
+            <option value="500">500 V-Bucks</option>
+            <option value="1000">1,000 V-Bucks</option>
+            <option value="2800">2,800 V-Bucks</option>
+            <option value="5000">5,000 V-Bucks</option>
+            <option value="13500">13,500 V-Bucks</option>
+        </select>
+
+        <button
+            class="main-button"
+            onclick="giveVbucks()"
+        >
+            🎁 GIVE V-BUCKS
+        </button>
+
+        <div id="result"></div>
+
+        <div class="notice">
+            This website is an independent simulation and does not
+            connect to or modify Fortnite accounts.
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2 class="rewards-title">
+            POPULAR REWARDS
+        </h2>
+
+        <div class="rewards">
+
+            <div class="reward-card">
+                <div class="reward-icon">💎</div>
+                <strong>1,000</strong>
+                <small>V-Bucks</small>
+            </div>
+
+            <div class="reward-card">
+                <div class="reward-icon">💎</div>
+                <strong>2,800</strong>
+                <small>V-Bucks</small>
+            </div>
+
+            <div class="reward-card">
+                <div class="reward-icon">💎</div>
+                <strong>13,500</strong>
+                <small>V-Bucks</small>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    Independent fan-made website • Not affiliated with Epic Games
+</footer>
+
+
+<script>
+
+function giveVbucks() {
+
+    const username =
+        document.getElementById("username").value.trim();
+
+    const amount =
+        Number(document.getElementById("amount").value);
+
+    const result =
+        document.getElementById("result");
+
+    if (!username) {
+
+        result.style.display = "block";
+
+        result.innerHTML =
+            "❌ Please enter a Fortnite display name.";
+
+        return;
+    }
+
+    result.style.display = "block";
+
+    result.innerHTML = `
+        <div style="font-size:42px;">🎉</div>
+
+        <div style="margin:10px 0;">
+            <strong>${escapeHTML(username)}</strong>
+            received
+        </div>
+
+        <div class="reward-number">
+            ${amount.toLocaleString()} V-Bucks
+        </div>
+
+        <div style="margin-top:10px;">
+            ✨ Reward created!
+        </div>
+    `;
+
+    result.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+}
+
+</script>
+
+</body>
+</html>
