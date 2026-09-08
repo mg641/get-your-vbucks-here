@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mg641.github.io/get-your-vbucks-here/sitemap.xml
